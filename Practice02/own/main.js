@@ -6,7 +6,7 @@ imgArray[2] = "images/pizza02.jpg";
 imgArray[3] = "images/pizza03.jpg";
 imgArray[4] = "images/pizza04.jpg";
 
-source[0] = "images/pizza01,jpg";
+source[0] = "images/pizza01.jpg";
 source[1] = "images/loading.gif";
 source[2] = "images/pizza02.jpg";
 source[3] = "images/pizza03.jpg";

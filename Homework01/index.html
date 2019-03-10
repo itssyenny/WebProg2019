@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>TODO APP in pure JS</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="styles.css"/>
+        <style>
+            .hide {
+	            display: none;
+            }
+        </style>
+    </head>
+    <body>      
+        <div id="root" class="todo-app__root">
+            <header class="todo-app__header todo-app__title">todos</header>
+            <section class="todo-app__main">
+                <input type="text" class="todo-app__input" id="todo-app__input" placeholder="What needs to be done?">
+    
+                    <ul class="todo-app__list" id="todo-list">
+                        <!-- <li class="todo-app__item" id="list_0">
+                           
+                            <div class="todo-app__checkbox">
+                                <input type="checkbox" id="0" onclick="validate()"/>
+                                <label for="0"></label>
+                            </div>
+
+                            <h1 class="todo-app__item-detail" id="0">todo1</h1>
+
+                            <img src="img/x.png" class="todo-app__item-x">
+                        </li> -->
+                    </ul>
+            </section>
+    
+            <footer class="todo-app__footer" id="todo-footer">
+                <div class="todo-app__total">
+                    <span id="todo-app__total">0</span> left
+                </div>
+                <ul class="todo-app__view-buttons">
+                     <button id="AllFilter" type="button" onclick="ShowAll()">All</button>
+                     <button id="ActiveFilter" type="button" onclick="ActiveButton()">Active</button>
+                     <button id="CompletedFilter" type="button" onclick="CompletedButton()">Completed</button>
+                </ul>
+                <div class="todo-app__clean">
+                    <button type="button" onclick="ClearCompleted()">Clear completed</button>
+                </div>
+            </footer>
+        </div>
+        <script type="text/javascript" src="main.js"></script>
+
+    </body>
+</html>

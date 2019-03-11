@@ -11,3 +11,5 @@ In my TODO List, it has the functionalities as follows :
   Display All, Active, and Completed items
 5. 統計並顯示未完成的 TodoItem 數量
   Count the number of items left
+6. Input your name
+   Additional features to identify whose todo list it is

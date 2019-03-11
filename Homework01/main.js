@@ -1,36 +1,4 @@
-var Todo_items = function(node,isComplete) {
-    this.node = node;
-    this.isComplete = false;
-};
-
-var Queue = function() {
-    this.items = [];
-    
-    this.isEmpty = function() {
-        return (this.items.length == 0);
-    }
-
-    this.enqueue = function(data) {
-        return this.items.push(data);
-    }
-
-    this.dequeue = function() {
-        return this.items.shift();
-    }
-
-    this.front = function() {
-        return this.items[0];
-    }
-
-    this.size = function() {
-        return this.items.length;
-    }
-};
-// queue is for id record
 var total_item = 0;
-var used_id = 0;
-var todo_items = new Array();
-// var QueueID = new Queue();
 const input = document.getElementById("todo-input");
 
 function EditTODOCount(now) {
@@ -41,17 +9,15 @@ function EditTODOCount(now) {
 function DeleteItem(event) {
     console.log('delete id = ' + event.id);
     const eventli = event.parentNode;
-    // console.log(event.parentNode);
     var start = event.id;
-    // QueueID.enqueue(event.id);
     eventli.parentNode.removeChild(eventli);
     total_item = total_item - 1;
 
     EditTODOCount(total_item);
 }
 
+var check = 0;
 function CheckBOX(event) {
-    var check = 0;
     if(event.type === "checkbox") {
         if(event.checked) {
             // alert('checked');
@@ -68,7 +34,7 @@ function CheckBOX(event) {
     }
 
     //update total_item
-    EditTODOCount(total_item - check);
+    EditTODOCount(total_item-check);
 }
 
 
@@ -109,7 +75,6 @@ input.addEventListener('keyup', event => {
 
         //update total_item
         total_item = total_item + 1;
-        var x = ulElement.querySelectorAll("li");
         EditTODOCount(total_item);
 
         input.value = '';
@@ -118,18 +83,21 @@ input.addEventListener('keyup', event => {
 });
 
 const ulElement = document.getElementById("todo-list");
-
-function AllBtn() {
+function AllBtn() {   
+    var count = 0; 
     var x = ulElement.querySelectorAll("li");
     for(var i = 0; i < x.length; i++) {
+        var y = x[i].getElementsByTagName("INPUT")[0];
+        if(y.checked == true) count++;
         x[i].classList.remove("hide");
+
     }
-    EditTODOCount(x.length);
+    EditTODOCount(total_item-count);
 }
 
 function ActiveBtn() {
-    // alert('active');
     var active = 0;
+    // alert('active');
     var x = ulElement.querySelectorAll("li");
     for(var i = 0; i < x.length; i++) {
         var y = x[i].getElementsByTagName("INPUT")[0];
@@ -143,7 +111,6 @@ function ActiveBtn() {
     }
     EditTODOCount(active);
 }
-
 function CompletedBtn() {
     var completed = 0;
     var x = ulElement.querySelectorAll("li");
@@ -156,7 +123,6 @@ function CompletedBtn() {
     }
     EditTODOCount(completed); 
 }
-
 function ClearAll() {
     var clear = 0;
     var x = ulElement.querySelectorAll("li");
@@ -167,5 +133,6 @@ function ClearAll() {
             clear++;
         }
     }
-    EditTODOCount(total_item-clear); 
+    total_item = total_item-clear;
+    EditTODOCount(total_item); 
 }

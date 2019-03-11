@@ -4,49 +4,55 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>TODO APP in pure JS</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="styles.css"/>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            media="screen"
+            href="styles.css"
+        />
         <style>
             .hide {
-	            display: none;
+                display: none;
             }
         </style>
     </head>
-    <body>      
+    <body>
         <div id="root" class="todo-app__root">
             <header class="todo-app__header todo-app__title">todos</header>
             <section class="todo-app__main">
-                <input type="text" class="todo-app__input" id="todo-app__input" placeholder="What needs to be done?">
-    
-                    <ul class="todo-app__list" id="todo-list">
-                        <!-- <li class="todo-app__item" id="todo-list">
-                           
-                            <div class="todo-app__checkbox">
-                                <input type="checkbox" id="0" onclick="validate()"/>
-                                <label for="0"></label>
-                            </div>
+                <input class="todo-app__input" id="todo-input" placeholder="What needs to be done?">
 
-                            <h1 class="todo-app__item-detail" id="0">todo1</h1>
+                <ul class="todo-app__list" id="todo-list">
+                   <!--  <li class="todo-app__item">
+                        <div class="todo-app__checkbox">
+                            <input id="0" type='checkbox' onclick="CheckBOX(event)">
+                            <label for="0"></label>
+                        </div>
 
-                            <img src="img/x.png" class="todo-app__item-x">
-                        </li> -->
-                    </ul>
-            </section>
-    
-            <footer class="todo-app__footer" id="todo-footer">
-                <div class="todo-app__total">
-                    <span id="todo-app__total">0</span> left
-                </div>
-                <ul class="todo-app__view-buttons">
-                     <button id="AllFilter" type="button" onclick="ShowAll()">All</button>
-                     <button id="ActiveFilter" type="button" onclick="ActiveButton()">Active</button>
-                     <button id="CompletedFilter" type="button" onclick="CompletedButton()">Completed</button>
+                        <h1 class="todo-app__item-detail">This is the first TODO</h1>
+                        <img src="./img/x.png" class="todo-app__item-x" id="0" onclick="DeleteItem(this)">
+                    </li> -->
                 </ul>
-                <div class="todo-app__clean">
-                    <button type="button" onclick="ClearCompleted()">Clear completed</button>
-                </div>
-            </footer>
-        </div>
-        <script type="text/javascript" src="main.js"></script>
 
+
+                <footer class="todo-app__footer" id="todo-footer">
+                    <div class="todo-app__total">
+                        <span id="todo-count">0</span> left
+                    </div>
+
+                    <ul class="todo-app__view-buttons">
+                        <li><button id="All" onclick="AllBtn()">All</button></li>
+                        <li><button id="Acitve" onclick="ActiveBtn()">Active</button></li>
+                        <li><button id="Completed" onclick="CompletedBtn()">Completed</button></li>
+                    </ul>
+
+                    <div class="todo-app__clean">
+                        <button id="Clear" onclick="ClearAll()">Clear completed</button>
+                    </div>
+                </footer>
+
+            </section>
+       </div>
+       <script type="text/javascript" src="main.js"></script>
     </body>
 </html>

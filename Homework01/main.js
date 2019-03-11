@@ -1,8 +1,5 @@
-const input = document.getElementById("todo-app__input");
-
-var Todo_items = function(node,id,isComplete) {
+var Todo_items = function(node,isComplete) {
     this.node = node;
-    this.id = id;
     this.isComplete = false;
 };
 
@@ -29,201 +26,146 @@ var Queue = function() {
         return this.items.length;
     }
 };
-
-var used_id = 0;
+// queue is for id record
 var total_item = 0;
-var QueueID = new Queue();
+var used_id = 0;
 var todo_items = new Array();
+// var QueueID = new Queue();
+const input = document.getElementById("todo-input");
 
-function validate(event) {
-    const element = event.target;
-    var id = event.target.id;
-    console.log('in validate id = ' + id);
-    if(element.type === "checkbox") {
-        if(element.checked) {
-            todo_items[id].isComplete = true;
-            var fontid = "font_" + id;
-            console.log('in validate fontid = ' + fontid);
-            var element_att = document.getElementById(fontid); 
-            element_att.parentNode.style.textDecoration = "line-through";
-            element.parentNode.style.opacity = 0.5;
-            // console.log('in checkbox = ' + fontid + " " + todo_items[id].isComplete);
+function EditTODOCount(now) {
+    var todoCount = document.getElementById("todo-count");
+    todoCount.innerHTML = now;
+}
+
+function DeleteItem(event) {
+    console.log('delete id = ' + event.id);
+    const eventli = event.parentNode;
+    // console.log(event.parentNode);
+    var start = event.id;
+    // QueueID.enqueue(event.id);
+    eventli.parentNode.removeChild(eventli);
+    total_item = total_item - 1;
+
+    EditTODOCount(total_item);
+}
+
+function CheckBOX(event) {
+    var check = 0;
+    if(event.type === "checkbox") {
+        if(event.checked) {
+            // alert('checked');
+            const parent = event.parentNode.parentNode.getElementsByTagName("H1")[0];
+            parent.style["textDecoration"] = "line-through";
+            parent.style["opacity"] = 0.5;
+            check++;
         }
         else {
-            var fontid = "font_" + id;
-            // console.log(fontid);
-            var element_att = document.getElementById(fontid); 
-            element_att.parentNode.style.textDecoration = "none";
-            element.parentNode.style.opacity = 1;
-            todo_items[id].isComplete = false;
+            const parent = event.parentNode.parentNode.getElementsByTagName("H1")[0];
+            parent.style["textDecoration"] = "line-through";
+            parent.style["opacity"] = 1;
         }
     }
+
+    //update total_item
+    EditTODOCount(total_item - check);
 }
 
-function remove(event) {
-    const id = event.target.parentNode.id;
-    // console.log('id = ' + id);
-    //parse the id and get the number only
-    var num = id.match(/\d/g);
-    // console.log('num = ' + num);
 
-    var x = document.getElementById(id);
-    x.parentNode.removeChild(x);
-    todo_items.splice(num, 1);
+input.addEventListener('keyup', event => {
+    event.preventDefault();
+    if(event.keyCode == 13 && event.target.value !== '') {
 
-    QueueID.enqueue(num);
-    // console.log('before remove = ' + total_item);
-    total_item--;
-    // console.log('after remove = ' + total_item);
+        //build the li element
+        const ul = document.getElementById("todo-list");
+        const li = document.createElement("LI");
+        const checkbox = document.createElement("DIV");
+        const input_checkBox = document.createElement("INPUT");
+        const label = document.createElement("LABEL");
+        const h1 = document.createElement("H1");
+        const img = document.createElement("IMG");
 
-    //update the total items
-    todoCount = document.getElementById("todo-app__total");
-    todoCount.innerHTML = total_item;
-}
+        li.setAttribute("class","todo-app__item");
+        checkbox.setAttribute("class","todo-app__checkbox");
+        input_checkBox.setAttribute("id",total_item);    //edit
+        input_checkBox.type = "checkbox";
+        input_checkBox.setAttribute("onclick","CheckBOX(this)");
+        label.setAttribute("for",total_item);   //edit
+        h1.setAttribute("class","todo-app__item-detail");
+        h1.setAttribute("id","todo-item-detail")
+        h1.appendChild(document.createTextNode(event.target.value));
+        img.src ="./img/x.png";
+        img.setAttribute("class","todo-app__item-x");
+        img.setAttribute("id",total_item);
+        img.setAttribute("onclick","DeleteItem(this)");
 
-input.addEventListener("keyup", event => {
-    if((event.which == 13 || event.keyCode == 13) && event.target.value !== '') {
-        //create todo item whose content is the entered string
-        if(QueueID.isEmpty() == true) {
-            used_id = total_item;
-        }
-        else {
-            used_id = QueueID.front();
-            QueueID.dequeue();
-        }     
-        
-        console.log("TEXT = " + event.target.value);
-        console.log('input used_id = ' + used_id);
+        checkbox.appendChild(input_checkBox);
+        checkbox.appendChild(label);
+        li.appendChild(checkbox);
+        li.appendChild(h1);
+        li.appendChild(img);
+        ul.appendChild(li);
 
-        var tmp = new Todo_items(event.target.value,used_id,false);
-        todo_items[total_item] = tmp;
 
-        var ul = document.getElementById("todo-list");
-        var listItem = document.createElement("LI");
-        listItem.setAttribute("class","todo-app__item");
-        listItem.setAttribute("id","list_" + used_id);
+        //update total_item
+        total_item = total_item + 1;
+        var x = ulElement.querySelectorAll("li");
+        EditTODOCount(total_item);
 
-        //the checkbox
-        var div_checkBox = document.createElement("DIV");
-        div_checkBox.setAttribute("class","todo-app__checkbox");
-        var input_checkBox = document.createElement("INPUT");
-        input_checkBox.setAttribute("id",used_id);
-        input_checkBox.type='checkbox';
-        input_checkBox.setAttribute("onclick","validate(event)");
-        // input_checkBox.setAttribute("type", "checkbox");
-        
-        div_checkBox.appendChild(input_checkBox);
-
-        var label_checkBox = document.createElement("LABEL");
-        label_checkBox.setAttribute("for",used_id);
-        //append input checkbox to the div to do app 
-        div_checkBox.appendChild(label_checkBox);
-        
-        //name
-        var font_items = document.createElement("H1");
-        font_items.setAttribute("class","todo-app__item-detail");
-        font_items.setAttribute("id", "font_" + used_id);
-        var text = document.createTextNode(event.target.value);
-        font_items.appendChild(text);
-
-        //img x
-        var img_items = document.createElement("IMG");
-
-        img_items.src = "img/x.png";
-        img_items.setAttribute("class","todo-app__item-x");
-        img_items.setAttribute("id", "todo-app__item-x");
-        img_items.setAttribute("onclick","remove(event)");
-
-        //append to listItem
-        listItem.appendChild(div_checkBox);
-        listItem.appendChild(font_items);
-        listItem.appendChild(img_items);
-        ul.appendChild(listItem);
-        
-        total_item++;
-        console.log('total items after adding = ' + total_item);
-
-        //update the total items
-        todoCount = document.getElementById("todo-app__total");
-        // todoCount.innerHTML = todo_items.filter(element => !element.isComplete).length;
-        todoCount.innerHTML = total_item;
-        input.value = "";
-       
+        input.value = '';
     }
     else return false;
 });
 
-var ulElement = document.getElementById("todo-list");
-function ShowAll() {
+const ulElement = document.getElementById("todo-list");
+
+function AllBtn() {
     var x = ulElement.querySelectorAll("li");
     for(var i = 0; i < x.length; i++) {
         x[i].classList.remove("hide");
     }
-    todoCount = document.getElementById("todo-app__total");
-    todoCount.innerHTML = todo_items.length;
-    // console.log('total in showall = ' + total_item);
+    EditTODOCount(x.length);
 }
 
-function ActiveButton() {
+function ActiveBtn() {
+    // alert('active');
+    var active = 0;
     var x = ulElement.querySelectorAll("li");
-    // console.log('in active length = ' + x.length);
-    
-    ShowAll();
-
     for(var i = 0; i < x.length; i++) {
-        var y = document.getElementById("list_" + todo_items[i].id);
-        if(todo_items[i].isComplete == true) {
-            y.classList.add("hide");
+        var y = x[i].getElementsByTagName("INPUT")[0];
+        console.log(y + " " + y.checked);
+        if(y.checked == true) {
+            x[i].classList.add("hide");
+        } else {
+            x[i].classList.remove("hide");
+            active++;
         }
     }
-    todoCount = document.getElementById("todo-app__total");
-    todoCount.innerHTML = todo_items.filter(element => !element.isComplete).length;
+    EditTODOCount(active);
 }
 
-function CompletedButton() {
+function CompletedBtn() {
+    var completed = 0;
     var x = ulElement.querySelectorAll("li");
-    // console.log('in complete length = ' + x.length);
-
-    ShowAll();
-
     for(var i = 0; i < x.length; i++) {
-        var y = document.getElementById("list_" + todo_items[i].id);
-        if(todo_items[i].isComplete === false) {
-            y.classList.add("hide");
-        }
+        var y = x[i].getElementsByTagName("INPUT")[0];
+        if(y.checked == true) {
+            x[i].classList.remove("hide");
+            completed++;
+        } else x[i].classList.add("hide");
     }
-    todoCount = document.getElementById("todo-app__total");
-    todoCount.innerHTML = todo_items.filter(element => element.isComplete).length;
+    EditTODOCount(completed); 
 }
 
-function ClearCompleted() {
-    var filter = function(element) {
-        return element.isComplete == true;
-    }
+function ClearAll() {
+    var clear = 0;
     var x = ulElement.querySelectorAll("li");
-    // console.log('in clear length = ' + x.length);
-
-    var removing = new Array();
-    var count = 0;
     for(var i = 0; i < x.length; i++) {
-        if(todo_items[i].isComplete === true) {
-            // console.log(i);
-            removing[count] = todo_items[i].id;
-            QueueID.enqueue(removing[count]);
-            total_item--;
-            count++;
+        var y = x[i].getElementsByTagName("INPUT")[0];
+        if(y.checked == true) {
+            x[i].parentNode.removeChild(x[i]);
+            clear++;
         }
     }
-
-    for(var j = 0; j < count; j++) {
-        var id = "list_" + removing[j]; 
-        var y = document.getElementById(id);
-        y.parentNode.removeChild(y);
-        todo_items.splice(removing[j], 1);
-    }
-
-    //update the total items
-    todoCount = document.getElementById("todo-app__total");
-    todoCount.innerHTML = total_item;
-
+    EditTODOCount(total_item-clear); 
 }

@@ -40,6 +40,36 @@ input[type='checkbox'] {
     padding: 0;
 }
 
+#btn {
+    background-color: transparent;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#name {
+    -webkit-animation: colorchange 20s infinite alternate;
+    animation-name: colorchange;
+    animation-duration: 20s;
+    position: relative;
+}
+
+@-webkit-keyframes colorchange {
+    0% {background-color:  blue; color: whitesmoke;}
+    10% {background-color: #8e44ad; color: whitesmoke;}
+    20% {background-color: #1abc9c; color: whitesmoke;}
+    30% {background-color: #d35400; color: whitesmoke;}
+    40% {background-color: blue; color: whitesmoke;}
+    50% {background-color: #34495e; color: whitesmoke;}
+    60% {background-color: blue; color: whitesmoke;}
+    70% {background-color: #2980b9; color: whitesmoke;}
+    80% {background-color: #f1c40f; color: whitesmoke;}
+    90% {background-color: #2980b9; color: whitesmoke;}
+    100% {background-color: pink; color: whitesmoke;}
+}
+
 .todo-app__main {
     width: 100%;
 }

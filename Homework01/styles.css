@@ -121,8 +121,8 @@ input[type='checkbox'] {
 }
 
 .todo-app__checkbox input[type='checkbox']:checked + label {
-    /*background: #26ca299b;*/
-    background: rgba(21, 228, 10, 0.934);
+    background: #26ca299b;
+    /*background: rgba(21, 228, 10, 0.934);*/
 
 }
 

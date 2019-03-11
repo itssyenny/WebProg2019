@@ -1,6 +1,13 @@
 var total_item = 0;
 const input = document.getElementById("todo-input");
 
+function getName() {
+    var person = prompt("Please enter your name", "");
+    if(person != null) {
+        document.getElementById("name").innerHTML = person + "'s";
+        document.getElementById("btn").style.display = "none";
+    }
+}
 function EditTODOCount(now) {
     var todoCount = document.getElementById("todo-count");
     todoCount.innerHTML = now;

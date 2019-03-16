@@ -116,7 +116,7 @@ function draw() {
                 point.play();
                 score++;
             }
-            if(pipes[i].hits(bird)) {
+            if(pipes[i].hits(bird) || bird.fall()) {
                 GameOver();
             }
     
@@ -248,6 +248,13 @@ function Bird() {
 
     this.up = function() {
         this.vy += this.lift;        
+    }
+    
+    this.fall = function() {
+        if(this.y + 34 >= 596) {
+            return true;
+        }
+        else return false;
     }
     
     this.update = function() {

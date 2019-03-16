@@ -89,13 +89,13 @@ function draw() {
     }
     x1 *= 1;
     translate(x1, y1);
-    // console.log('image ' + bgImg[imgID].width, bgImg[imgID].height);
-    // console.log('imgID ' + imgID);
     image(bgImg[imgID], 0, 0, 288 * bgScale, 512 * bgScale);
-    image(bgImg[imgID], 288, 0, 288 * bgScale, 512 * bgScale);
-    pop();
+    image(bgImg[imgID], 260, 0, 288 * bgScale, 512 * bgScale);
+    image(bgImg[imgID], 600, 0, 288 * bgScale, 512 * bgScale);
 
-    if(frameCount % 100 == 0) {
+    pop();
+    console.log('framecount ' + frameCount);
+    if(frameCount % 125 == 0) {
         pipes.push(new Pipe());
     }
     if(touched === false) {
@@ -251,7 +251,7 @@ function Bird() {
     }
     
     this.fall = function() {
-        if(this.y + 34 >= 596) {
+        if(this.y + 30 >= 596) {
             return true;
         }
         else return false;

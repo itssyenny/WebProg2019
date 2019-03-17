@@ -94,10 +94,7 @@ function draw() {
     image(bgImg[imgID], 600, 0, 288 * bgScale, 512 * bgScale);
 
     pop();
-    console.log('framecount ' + frameCount);
-    if(frameCount % 125 == 0) {
-        pipes.push(new Pipe());
-    }
+    
     if(touched === false) {
         push();
         bird.x = width/2 - 20;
@@ -109,6 +106,10 @@ function draw() {
         image(readyImg, width/2 - 135, height/2-200, readyImg.width *1.5, readyImg.height * 1.5);
     }
     else {
+        if(frameCount % 125 == 0) {
+            pipes.push(new Pipe());
+        }
+
         for(var i = pipes.length-1; i >= 0; i--) {
             pipes[i].show();
             pipes[i].update();

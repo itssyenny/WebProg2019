@@ -31,6 +31,9 @@ var swoosh;
 var wing;
 var die;
 let imgID, index, start = 0, end = 0;
+let x1_constant = 0.5;
+let x2_constant = 1.2;
+let x2_constant2 = 1;
 
 function preload() {
     point = loadSound("assets/audio/point.ogg");
@@ -75,7 +78,6 @@ function setup() {
     myCanvas.parent("canvasWrapper");
     // setup code belows
     reset();
-
 }
 
 function draw() {
@@ -83,7 +85,7 @@ function draw() {
     background(0);
 
     push();
-    x1 -= 0.55;
+    x1 -= x1_constant;
     if(x1 < -bgImg[imgID].width) {
         x1 += bgImg[imgID].width;
     }
@@ -92,7 +94,6 @@ function draw() {
     image(bgImg[imgID], 0, 0, 288 * bgScale, 512 * bgScale);
     image(bgImg[imgID], 260, 0, 288 * bgScale, 512 * bgScale);
     image(bgImg[imgID], 600, 0, 288 * bgScale, 512 * bgScale);
-
     pop();
     
     if(touched === false) {
@@ -106,7 +107,9 @@ function draw() {
         image(readyImg, width/2 - 135, height/2-200, readyImg.width *1.5, readyImg.height * 1.5);
     }
     else {
-        if(frameCount % 125 == 0) {
+        // console.log('FRAME COUNT = ' + frameCount);
+        if((frameCount%80== 0) && bird.hit == false) {
+            // console.log('MAKING AT ' + frameCount);
             pipes.push(new Pipe());
         }
 
@@ -117,27 +120,36 @@ function draw() {
                 point.play();
                 score++;
             }
-            if(pipes[i].hits(bird) || bird.fall()) {
+            if(pipes[i].hits(bird)) {
+                // console.log('HITS at pipe ' + bird.y);
+                x1_constant = 0;
+                x2_constant = 0;
+                x2_constant2 = 0;
+                bird.hit = true;
+            }
+
+            if(bird.y > 560 && bird.y < 610) {
                 GameOver();
             }
-    
+
             if(pipes[i].offscreen()) {
                 pipes.splice(i, 1);
             }
         }
 
-        MyScores();
+
         index = Math.floor(Math.random() * (end - start)) + start;
         bird.update();
         bird.show();
+        MyScores();
 
         touched = true;
     }
 
     //base image
     push();
-    x2 -= pipes[0].speed * 0.5;
-    x2 -= 1;
+    x2 -= (2.5 * x2_constant);
+    // x2 -= x2_constant2;
     if(x2 < -baseImg.width) {
         x2 += baseImg.width;
     }
@@ -207,7 +219,6 @@ function reset() {
 
     bird = new Bird();
     pipes = [];
-    pipes.push(new Pipe());
     loop();
     
 }
@@ -237,13 +248,27 @@ function Bird() {
     this.lift = -15;
     this.vy = 0;
     this.angle = 0;
+    this.hit = false;
 
     this.show = function() {
         push();
+        if(this.y > 560 && this.y < 610) {
+            this.angle = 7;
+            this.vy = 0;
+            this.x += ((0.64 * 0.64)/0.7)+5;
+            this.y += 3.5;
+            // console.log(' masuk show ssini jatuh = ' + this.x, this.y , this.vy, this.angle);
+        }
+        
+        if(this.hit == true) {
+            this.x += 4.5;
+            this.y = 572;
+            this.angle = 7.6;
+        }
+
         translate(this.x, this.y);
         rotate(this.angle);
-        // console.log('index bird = '+ index);
-        image(manybirds[index], 0, 0,34,24);
+        image(manybirds[index], 0, 0, 34, 24);
         pop();
     }
 
@@ -251,22 +276,23 @@ function Bird() {
         this.vy += this.lift;        
     }
     
-    this.fall = function() {
-        if(this.y + 30 >= 596) {
-            return true;
-        }
-        else return false;
-    }
-    
     this.update = function() {
         this.vy += this.gravity;
         if(this.vy < -10) this.vy = -10;
         if(this.vy > 20) this.vy = 20;
+        if(this.vy < 0) this.angle -= 2.5;
         this.vy *= 0.9;
         this.y  += this.vy;
-        if(this.y > height) {   //if the bird's position is out of the bound
-            this.y = height;
+
+        var std = height - 112;
+        if(this.y > std) {   //if the bird's position is out of the bound
+            this.y = std;
             this.vy = 0;
+        }
+
+        if(this.hit == true) {
+            this.x -= 0.5;
+            this.vy += this.gravity;
         }
 
         if(this.y < 0) {
@@ -285,9 +311,9 @@ function Pipe() {
     this.top =  center - spacing/2;  
     this.bottom = height - (center + spacing / 2);
 
-    this.x = width;
+    this.x = 432;
     this.width = 65;
-    this.speed = 3.5;
+    this.speed = 2.5;
 
     this.hasCollided = false;
     this.passed = false;
@@ -302,17 +328,14 @@ function Pipe() {
 
     this.hits = function(bird) {
         if (bird.y < this.top || bird.y >= height-this.bottom) {
-            if (bird.x > this.x && bird.x < this.x + this.width) {
+            if (bird.x+24 > this.x && bird.x+24 < this.x + this.width) {
+                bird.hit = true;
                 this.hasCollided = true;
                 return true;
             }
         }
         this.hasCollided = false;
         return false;
-    }
-
-    this.offscreen = function() {
-        return (this.x < -this.width); 
     }
 
     this.show = function() {
@@ -322,5 +345,9 @@ function Pipe() {
 
     this.update = function() {
         this.x -= this.speed;
+    }
+
+    this.offscreen = function() {
+        return (this.x < -this.width); 
     }
 }

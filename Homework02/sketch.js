@@ -108,7 +108,7 @@ function draw() {
     }
     else {
         // console.log('FRAME COUNT = ' + frameCount);
-        if((frameCount%80== 0) && bird.hit == false) {
+        if((frameCount%75== 0) && bird.hit == false) {
             // console.log('MAKING AT ' + frameCount);
             pipes.push(new Pipe());
         }
@@ -318,12 +318,10 @@ function Bird() {
 }
 
 function Pipe() {
-    var spacing = random(200, 295);
-    var center = random(250, 350);
-
-    this.top =  center - spacing/2;  
-    this.bottom = height - (center + spacing / 2);
-
+    this.top = Math.floor(Math.random() * (250 - 75)) + 75;
+    this.bottom = this.top - 543;
+    if(this.bottom < 0) this.bottom *= (-1);
+    
     this.x = width;
     this.width = 65;
     this.speed = 3.5;

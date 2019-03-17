@@ -31,7 +31,7 @@ var swoosh;
 var wing;
 var die;
 let imgID, index, start = 0, end = 0;
-let x1_constant = 0.5;
+let x1_constant = 1.5;
 let x2_constant = 1.2;
 let x2_constant2 = 1;
 
@@ -148,7 +148,7 @@ function draw() {
 
     //base image
     push();
-    x2 -= (2.5 * x2_constant);
+    x2 -= (3.5 * x2_constant);
     // x2 -= x2_constant2;
     if(x2 < -baseImg.width) {
         x2 += baseImg.width;
@@ -198,6 +198,9 @@ function GameOver() {
 }
 
 function reset() {
+    x1_constant = 1.5;
+    x2_constant = 1.2;
+    x2_constant2 = 1;
     imgID = Math.floor(Math.random() * (2 - 0)) + 0;
     if(end >= 9) {
         start = 0;
@@ -313,7 +316,7 @@ function Pipe() {
 
     this.x = 432;
     this.width = 65;
-    this.speed = 2.5;
+    this.speed = 3.5;
 
     this.hasCollided = false;
     this.passed = false;

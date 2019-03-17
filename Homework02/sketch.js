@@ -122,10 +122,13 @@ function draw() {
             }
             if(pipes[i].hits(bird)) {
                 // console.log('HITS at pipe ' + bird.y);
+                bird.hit = true;
                 x1_constant = 0;
                 x2_constant = 0;
                 x2_constant2 = 0;
-                bird.hit = true;
+                for(var j = pipes.length-1; j >= 0; j--) {
+                    pipes[j].speed = 0;
+                }
             }
 
             if(bird.y > 560 && bird.y < 610) {
@@ -255,18 +258,18 @@ function Bird() {
 
     this.show = function() {
         push();
-        if(this.y > 560 && this.y < 610) {
-            this.angle = 7;
-            this.vy = 0;
-            this.x += ((0.64 * 0.64)/0.7)+5;
-            this.y += 3.5;
-            // console.log(' masuk show ssini jatuh = ' + this.x, this.y , this.vy, this.angle);
-        }
-        
-        if(this.hit == true) {
-            this.x += ((0.64 * 0.64)/0.7)+2;
-            this.y = 572;
-            this.angle = 7.6;
+        if(this.y > 556 && this.y < 610) {
+            this.vy += this.gravity;
+            if(this.hit == true) {
+                while(this.angle < 7.85)  {
+                    this.angle += 0.0225;
+                }
+                this.angle = 7.89;
+            } 
+            else {
+                this.angle = 6.8;
+            }
+            this.y = 576;
         }
 
         translate(this.x, this.y);
@@ -291,19 +294,25 @@ function Bird() {
         if(this.y > std) {   //if the bird's position is out of the bound
             this.y = std;
             this.vy = 0;
-        }
-
-        if(this.hit == true) {
-            this.x -= 0.5;
-            this.vy += this.gravity;
-        }
-
+        } 
+        
         if(this.y < 0) {
             this.y = 0;
             this.vy = 0;
         }
 
-        this.angle = map(this.vy, -10, 20, -0.7, 0.7);
+        if(this.hit == true) {
+            if(this.angle < 7.8) {
+                this.angle += 0.0125;
+                this.x += 0.0325;
+            } 
+            else {
+                this.angle -= 0.0125;
+            }
+        } 
+        else{
+            this.angle = map(this.vy, -10, 20, -0.7, 0.7);
+        }
     }
 }
 
@@ -314,7 +323,7 @@ function Pipe() {
     this.top =  center - spacing/2;  
     this.bottom = height - (center + spacing / 2);
 
-    this.x = 432;
+    this.x = width;
     this.width = 65;
     this.speed = 3.5;
 

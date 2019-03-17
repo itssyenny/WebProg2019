@@ -318,10 +318,13 @@ function Bird() {
 }
 
 function Pipe() {
-    this.top = Math.floor(Math.random() * (250 - 75)) + 75;
-    this.bottom = this.top - 543;
-    if(this.bottom < 0) this.bottom *= (-1);
-    
+    this.bottom = Math.floor(Math.random() * (378 - 252)) + 252;
+    this.bottom /= 1.448;
+    if(this.bottom < 200) this.bottom += 225;
+
+    this.top = (this.bottom - 610);
+    if(this.top < 0) this.top *= (-1);
+
     this.x = width;
     this.width = 65;
     this.speed = 3.5;

@@ -304,6 +304,7 @@ function Bird() {
         if(this.hit == true) {
             if(this.angle < 7.8) {
                 this.angle += 0.0125;
+                if(this.angle < 7.8) this.angle -= 0.0125;
                 this.x += 0.0325;
             } 
             else {

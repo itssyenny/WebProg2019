@@ -264,7 +264,7 @@ function Bird() {
         }
         
         if(this.hit == true) {
-            this.x += 4.5;
+            this.x += ((0.64 * 0.64)/0.7)+2;
             this.y = 572;
             this.angle = 7.6;
         }

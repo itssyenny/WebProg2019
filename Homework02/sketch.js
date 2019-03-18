@@ -303,7 +303,7 @@ function Bird() {
             this.vy = 0;
         }
 
-        console.log(this.angle);
+//         console.log(this.angle);
 
         if(this.hit == true) {
             this.angle += 0.14 

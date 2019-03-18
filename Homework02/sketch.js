@@ -264,6 +264,7 @@ function Bird() {
                 while(this.angle < 7.85)  {
                     this.angle += 0.0225;
                 }
+                this.x += 10;
                 this.angle = 7.89;
             } 
             else {
@@ -342,7 +343,7 @@ function Pipe() {
 
     this.hits = function(bird) {
         if (bird.y < this.top || bird.y >= height-this.bottom) {
-            if (bird.x+24 > this.x && bird.x+24 < this.x + this.width) {
+            if (bird.x+30 > this.x && bird.x+30 < this.x + this.width) {
                 bird.hit = true;
                 this.hasCollided = true;
                 return true;

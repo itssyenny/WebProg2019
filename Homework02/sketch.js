@@ -341,7 +341,7 @@ function Pipe() {
 
     this.hits = function(bird) {
         if (bird.y < this.top || bird.y >= height-this.bottom) {
-            if (bird.x+30 > this.x && bird.x+30 < this.x + this.width) {
+            if (bird.x+24 > this.x && bird.x+24 < this.x + this.width) {
                 bird.hit = true;
                 this.hasCollided = true;
                 return true;

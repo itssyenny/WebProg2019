@@ -264,8 +264,9 @@ function Bird() {
                 while(this.angle < 7.85)  {
                     this.angle += 0.0225;
                 }
-                this.x += 10;
-                this.angle = 7.89;
+                this.x += 2.5;
+                this.angle = 7.89
+
             } 
             else {
                 this.angle = 6.8;
@@ -302,15 +303,12 @@ function Bird() {
             this.vy = 0;
         }
 
+        console.log(this.angle);
+
         if(this.hit == true) {
-            if(this.angle < 7.8) {
-                this.angle += 0.0125;
-                this.x += 0.0325;
-                if(this.angle > 7.8) this.angle -= 0.0125;
-            } 
-            else {
-                this.angle -= 0.0125;
-            }
+            this.angle += 0.14 
+            if(this.angle > 1.52) this.angle -= 0.14;
+            this.x += 0.2;
         } 
         else{
             this.angle = map(this.vy, -10, 20, -0.7, 0.7);

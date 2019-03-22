@@ -19,7 +19,6 @@ class App extends Component {
             <Content>
                 <section className="home" id="home" style={{width:'100%', margin: 'auto'}}>
                   <Grid className="about-grid">
-                  {/* <h1>About</h1> */}
                     <Cell col={12}>
                       <img 
                         src="https://purepng.com/public/uploads/large/purepng.com-play-music-icon-android-kitkatsymbolsiconsapp-iconsandroid-kitkatandroid-44-721522597670k5zh5.png"

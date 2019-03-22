@@ -28,7 +28,6 @@ class App extends Component {
                       <div className="title-text" id="title-text">
                         <h1>I Am Flyin' In the Sky</h1>
                         <hr />
-                        
                        <div className="music-icon">
                           <img  
                             src="https://image.flaticon.com/icons/svg/189/189889.svg"
@@ -56,10 +55,11 @@ class App extends Component {
                 <section className="list-grid">
                   <Grid>
                     <Cell col={4} className="swing">
-                      <Card shadow={0} style={{width: '380px', height: '380px', margin: 'auto'}}>
-                        <CardTitle expand style={{color: '#fff', background: 'url(https://66.media.tumblr.com/5fe9b66b89194d8a4029d45f4cec4790/tumblr_miw5o6S8st1s4rmigo1_500.gif) center'}}>Tell Me That You Love Me</CardTitle>
+                      <Card shadow={0} style={{width: '400px', height: '400px', margin: 'auto'}}>
+                        <CardTitle expand style={{color: '#fff', background: 'url(https://66.media.tumblr.com/5fe9b66b89194d8a4029d45f4cec4790/tumblr_miw5o6S8st1s4rmigo1_500.gif) center'}}></CardTitle>
                         <CardText>
-                            <b>Tell Me That You Love Me</b> is so recommeneded. This song was composed by James TW
+                            <h5>Tell Me That You Love Me</h5>
+                            <p><b>Tell Me That You Love Me</b> is so recommeneded. This song was composed by James TW</p>
                         </CardText>
                         <CardActions border>
                             <Button colored><a href="https://youtu.be/cdG-VkY9XmA">Play</a></Button>
@@ -67,10 +67,11 @@ class App extends Component {
                     </Card>
                     </Cell>
                     <Cell col={4} className="swing">
-                      <Card shadow={0} style={{width: '380px', height: '380px', margin: 'auto'}}>
-                        <CardTitle expand style={{color: '#fff', background: 'url(https://wx2.sinaimg.cn/mw690/0077ubI4ly1frmp227ugtg30b40824ns.gif)'}}>Proof of my heartbeat 心跳的證明</CardTitle>
+                      <Card shadow={0} style={{width: '400px', height: '400px', margin: 'auto'}}>
+                        <CardTitle expand style={{color: '#fff', background: 'url(https://wx2.sinaimg.cn/mw690/0077ubI4ly1frmp227ugtg30b40824ns.gif) center'}}></CardTitle>
                         <CardText>
-                          <b>心跳的證明</b> is the OST of a new Taiwanese film 【吻定情】 , composed by Reyi 劉人語
+                          <h5>Proof of my heartbeat 心跳的證明</h5>
+                          <p><b>心跳的證明</b> is the OST of a new Taiwanese film 【吻定情】 , composed by Reyi 劉人語</p>
                         </CardText>
                         <CardActions border>
                             <Button colored><a href="https://youtu.be/fk5FEaSV7fo">Play</a></Button>
@@ -78,10 +79,11 @@ class App extends Component {
                     </Card>
                     </Cell>
                     <Cell col={4} className="swing">
-                      <Card shadow={0} style={{width: '380px', height: '380px', margin: 'auto'}}>
-                        <CardTitle expand style={{color: '#fff', background: 'url(https://thumbs.gfycat.com/IgnorantTameGordonsetter-max-1mb.gif)'}}>Still In Love</CardTitle>
+                      <Card shadow={0} style={{width: '400px', height: '400px', margin: 'auto'}}>
+                        <CardTitle expand style={{color: '#fff', background: 'url(https://thumbs.gfycat.com/IgnorantTameGordonsetter-max-1mb.gif) center'}}></CardTitle>
                         <CardText>
-                          <b>Still In love</b> is a popular song created by Jason Chen   
+                          <h5>Still In Love</h5>
+                          <p><b>Still In love</b> is a popular song created by Jason Chen</p>
                         </CardText>
                         <CardActions border>
                             <Button colored><a href="https://youtu.be/NRHHNPuEn5Y">Play</a></Button>

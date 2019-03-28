@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { brotliDecompress } from 'zlib';
 
 class TodoItems extends Component {
     // constructor(props) {
@@ -19,9 +20,16 @@ class TodoItems extends Component {
     }
 
     render () { 
+        var checkStyle = {
+            textDecoration: 'line-through',
+            opacity: 0.5
+        };
+        var uncheckStyle = {
+            textDecoration: "",
+            opacity: 1,
+        };
         var currentUser = this.props.entries;
         var todoEntries = this.props.entries.items; //array items[]
-
         var itemsCount = 0;
         if(currentUser.itemsToShow === "All") {
             // todoEntries = todoEntries;
@@ -42,11 +50,10 @@ class TodoItems extends Component {
                     {todoEntries.map(todo => (
                         <li className="todo-app__item" key={todo.key}>
                             <div className="todo-app__checkbox">
-                                <input id={todo.key} style={{textDecoration: todo.complete ? "line-through" : "", opacity: todo.complete ? 0.5 : 1}} 
-                                    type="checkbox" checked= {todo.complete} onChange={() => this.check(todo.key)}></input>
+                                <input id={todo.key} type="checkbox" checked= {todo.complete} onChange={() => this.check(todo.key)}></input>
                                 <label htmlFor={todo.key}></label>
                             </div>
-                            <h1 className="todo-app__item-detail">{todo.text}</h1>
+                            <h1 className="todo-app__item-detail" style={(todo.complete) ? checkStyle : uncheckStyle} >{todo.text}</h1>
                             <img src={require('./img/x.png')} alt="remove-icon" className="todo-app__item-x" id={todo.key} onClick={() => this.remove(todo.key)}></img>
                         </li>
                     ))}

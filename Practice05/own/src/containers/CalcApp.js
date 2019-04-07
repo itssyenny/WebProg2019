@@ -27,6 +27,8 @@ class CalcApp extends React.Component {
       selectedOperator: null,
       savedValue: null,
       beforeIsOperator: false,
+      equalNum: null,
+      equalOperator: null,
       savedOperatorforNum: null
     });
   }

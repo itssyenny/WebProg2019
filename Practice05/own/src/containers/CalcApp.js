@@ -44,7 +44,7 @@ class CalcApp extends React.Component {
     } 
     else {
       this.setState({
-        displayValue: this.state.displayValue === '0' ? String(digit) : (this.state.displayValue + String(digit)),
+        displayValue: (this.state.displayValue === '0') ? String(digit) : (this.state.displayValue + String(digit)),
         beforeIsOperator:false,
         savedOperatorforNum: null
       });
@@ -162,23 +162,32 @@ class CalcApp extends React.Component {
             <CalcButton onClick={() => this.PlusMinus()}>+/-</CalcButton>
             <CalcButton onClick={() => this.inputPercent()}>%</CalcButton>
             <CalcButton className="calc-operator" onClick={() => this.Operation('/')}>÷</CalcButton>
-          {/* </div>
-          <div className="calc-row"> */}
+          </div>
+
+          <div className="calc-row">
             <CalcButton className="calc-number" onClick={() => this.inputDigit(7)}>7</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(8)}>8</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(9)}>9</CalcButton>
             <CalcButton className="calc-operator" onClick={() => this.Operation('*')}>x</CalcButton>
+          </div>
+
+          <div className="calc-row">
             <CalcButton className="calc-number" onClick={() => this.inputDigit(4)}>4</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(5)}>5</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(6)}>6</CalcButton>
             <CalcButton className="calc-operator" onClick={() => this.Operation('-')}>-</CalcButton>
+          </div>
+          <div className="calc-row">
             <CalcButton className="calc-number" onClick={() => this.inputDigit(1)}>1</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(2)}>2</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDigit(3)}>3</CalcButton>
             <CalcButton className="calc-operator" onClick={() => this.Operation('+')}>+</CalcButton>
+          </div>
+          
+          <div className="calc-row">
             <CalcButton className="calc-number bigger-btn" onClick={() => this.inputDigit(0)}>0</CalcButton>
             <CalcButton className="calc-number" onClick={() => this.inputDot('.')}>.</CalcButton>
-            <CalcButton className="calc-operator" onClick={() => this.Operation('=')}>=</CalcButton>            
+            <CalcButton className="calc-operator" onClick={() => this.Operation('=')}>=</CalcButton>  
           </div>
         </div>
       </div>

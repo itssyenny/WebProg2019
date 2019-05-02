@@ -16,6 +16,7 @@ In this project, I create a website that can help people to take notes of their 
   $ npm install
   $ cd ..
   $ npm install
+  $ chmod +x run.sh
   $ ./run.sh
   
 ```

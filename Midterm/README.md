@@ -1,3 +1,16 @@
+# Midterm Individual Project
+
+Name : 黃麗璿
+Student ID : B05902102
+
+## Project Orientation
+
+In this project, I create a website that can help people to take notes of their daily meals. This project is written as follows :
+- Frontend program is written in React.JS
+- Backend is written in Node.JS and Express.JS using the functionality of Express Middleware and Router.
+
+------------------------------------------------------------------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

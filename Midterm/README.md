@@ -9,6 +9,30 @@ In this project, I create a website that can help people to take notes of their 
 - Frontend program is written in React.JS
 - Backend is written in Node.JS and Express.JS using the functionality of Express Middleware and Router.
 
+## Project Implementation
+
+```
+  $ cd backend
+  $ npm install
+  $ cd ..
+  $ npm install
+  $ ./run.sh
+  
+```
+
+If there is an error running the file run.sh, you can run it manually by:
+
+```
+  $ cd backend
+  $ npm install
+  $ cd ..
+  $ npm install
+  $ node ./backend/server.js
+  
+  //open new terminal
+  $ npm start
+  
+```
 ------------------------------------------------------------------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

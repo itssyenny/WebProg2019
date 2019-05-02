@@ -1,6 +1,6 @@
 # Midterm Individual Project
 
-Name : 黃麗璿
+Name : 黃麗璿 <br />
 Student ID : B05902102
 
 ## Project Orientation
